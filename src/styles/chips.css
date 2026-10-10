@@ -1,0 +1,124 @@
+.chip {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 2px 1.5px rgba(0, 0, 0, 0.55));
+}
+
+/* ---------------------------------------------------------------- stacks */
+
+.chip-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  --chip-size: var(--stack-chip, 40px);
+  --chip-step: calc(var(--chip-size) * 0.085);
+}
+
+.chip-stack-pile {
+  position: relative;
+  width: var(--chip-size);
+  height: calc(var(--chip-size) + (var(--count) - 1) * var(--chip-step));
+  min-height: var(--chip-size);
+}
+
+.chip-stack-pile:empty {
+  display: none;
+}
+
+.stack-chip {
+  position: absolute;
+  left: 0;
+  bottom: calc(var(--k) * var(--chip-step));
+  width: var(--chip-size);
+  height: var(--chip-size);
+}
+
+.chip-stack-label {
+  font-size: clamp(11px, calc(var(--chip-size) * 0.3), 14px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--gold-light);
+  white-space: nowrap;
+}
+
+.stack--lost .chip-stack-pile,
+.stack--lost .chip-stack-label {
+  animation: chips-lost calc(650ms * var(--speed)) calc(450ms * var(--speed)) ease-in forwards;
+}
+
+.stack--payout {
+  animation: payout-in calc(620ms * var(--speed)) calc(380ms * var(--speed)) cubic-bezier(0.2, 0.9, 0.3, 1.1) both;
+}
+
+.stack--payout .chip-stack-label {
+  color: var(--win);
+}
+
+.stack--push .chip-stack-pile {
+  animation: push-pulse 900ms ease-in-out 2;
+}
+
+/* ---------------------------------------------------------------- rack */
+
+.chip-rack {
+  display: flex;
+  gap: clamp(4px, 0.8vw, 10px);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.25));
+  border: 1px solid rgba(217, 180, 90, 0.22);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.rack-chip {
+  position: relative;
+  width: clamp(42px, 6.4vh, 64px);
+  height: clamp(42px, 6.4vh, 64px);
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.18s cubic-bezier(0.3, 1.6, 0.5, 1), filter 0.2s, opacity 0.2s;
+}
+
+.rack-chip:hover:not(:disabled) {
+  transform: translateY(-6px) rotate(-8deg);
+  filter: drop-shadow(0 0 10px rgba(243, 217, 139, 0.55));
+}
+
+.rack-chip:active:not(:disabled) {
+  transform: translateY(-2px) scale(0.92);
+}
+
+.rack-chip:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+  filter: grayscale(0.7);
+}
+
+.rack-chip:focus-visible {
+  outline-offset: 3px;
+  border-radius: 50%;
+}
+
+.rack-kbd {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--cream-dim);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}

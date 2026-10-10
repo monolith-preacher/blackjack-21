@@ -1,0 +1,311 @@
+/* ---------------------------------------------------------------- result banner */
+
+.result-banner {
+  position: relative;
+  text-align: center;
+  padding: 8px 34px;
+  border-radius: 20px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55), transparent 72%);
+  animation: banner-in calc(560ms * var(--speed)) cubic-bezier(0.2, 1.35, 0.4, 1) both;
+}
+
+.result-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(24px, 4.6vh, 46px);
+  letter-spacing: 0.08em;
+  line-height: 1.05;
+  text-shadow: 0 3px 14px rgba(0, 0, 0, 0.6);
+}
+
+.result-amount {
+  margin-top: 4px;
+  font-weight: 700;
+  font-size: clamp(14px, 2.2vh, 20px);
+  font-variant-numeric: tabular-nums;
+}
+
+.result-sub {
+  margin-top: 2px;
+  font-size: clamp(11px, 1.6vh, 13px);
+  color: var(--cream-dim);
+  letter-spacing: 0.04em;
+}
+
+.result-banner--blackjack .result-title {
+  background: linear-gradient(100deg, #b8862b 0%, #fff3c4 25%, #e4b955 45%, #fff8dc 60%, #b8862b 85%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 0 16px rgba(243, 217, 139, 0.55)) drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+  animation: shimmer 2.4s linear infinite;
+}
+
+.result-banner--blackjack .result-amount,
+.result-banner--win .result-amount {
+  color: var(--win);
+}
+
+.result-banner--win .result-title {
+  color: var(--gold-light);
+  text-shadow: 0 0 20px rgba(243, 217, 139, 0.45), 0 3px 10px rgba(0, 0, 0, 0.6);
+}
+
+.result-banner--push .result-title {
+  color: var(--push);
+}
+
+.result-banner--lose .result-title {
+  color: var(--lose);
+}
+
+.result-banner--bust .result-title {
+  color: var(--bust);
+  animation: shake 0.45s ease-in-out;
+}
+
+.result-banner--lose .result-amount,
+.result-banner--bust .result-amount {
+  color: var(--lose);
+}
+
+.sparkles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sparkles span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px;
+  background: var(--gold-light);
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  opacity: 0;
+  --a: calc(var(--s) * 41deg);
+  animation: sparkle calc(1300ms * var(--speed)) calc(var(--s) * 35ms) ease-out forwards;
+}
+
+.sparkles span:nth-child(3n) {
+  background: #fff;
+  width: 7px;
+  height: 7px;
+}
+
+.sparkles span:nth-child(4n + 1) {
+  --dist: 170px;
+}
+
+/* ---------------------------------------------------------------- collecting cards */
+
+.is-collecting .card-slot {
+  animation: collect calc(480ms * var(--speed)) ease-in forwards;
+}
+
+.is-collecting .hand--dealer .card-slot {
+  animation-name: collect-dealer;
+}
+
+.is-collecting .chip-stack,
+.is-collecting .outcome-badge,
+.is-collecting .value-badge,
+.is-collecting .result-banner {
+  animation: fade-out calc(300ms * var(--speed)) ease-in forwards;
+}
+
+/* ---------------------------------------------------------------- keyframes */
+
+@keyframes message-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@keyframes banner-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+@keyframes badge-pop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -250% 0;
+  }
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--a)) translateX(10px) scale(0.2);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(var(--a)) translateX(var(--dist, 130px)) scale(1.1) rotate(90deg);
+  }
+}
+
+@keyframes win-glow {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-6px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-4px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes chips-lost {
+  to {
+    opacity: 0;
+    transform: translateY(-80px) scale(0.85);
+  }
+}
+
+@keyframes payout-in {
+  from {
+    opacity: 0;
+    transform: translateY(-90px) scale(0.85);
+  }
+}
+
+@keyframes push-pulse {
+  50% {
+    transform: scale(1.08);
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes collect {
+  to {
+    opacity: 0;
+    transform: translate(-38vw, -42vh) rotate(-30deg) scale(0.6);
+  }
+}
+
+@keyframes collect-dealer {
+  to {
+    opacity: 0;
+    transform: translate(-30vw, -6vh) rotate(-20deg) scale(0.6);
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.94);
+  }
+}
+
+@keyframes chip-bounce {
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes marker-bob {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+
+@keyframes delta-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@keyframes dot-in {
+  from {
+    transform: scale(0);
+  }
+}
+
+@keyframes controls-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes primary-glow {
+  0%,
+  100% {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 0 rgba(243, 217, 139, 0);
+  }
+  50% {
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 22px rgba(243, 217, 139, 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-banner--blackjack .result-title,
+  .btn--primary:not(:disabled),
+  .active-marker,
+  .hand--player .hand-cards::after,
+  .modal-chips .chip {
+    animation: none !important;
+  }
+  .sparkles {
+    display: none;
+  }
+}

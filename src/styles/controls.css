@@ -1,0 +1,285 @@
+.dock {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.15));
+}
+
+.controls {
+  max-width: 1180px;
+  margin: 0 auto;
+  min-height: clamp(56px, 9vh, 84px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.4vw, 16px);
+  flex-wrap: wrap;
+  animation: controls-in calc(300ms * var(--speed)) ease-out;
+}
+
+.controls--betting {
+  max-width: 1340px;
+  justify-content: center;
+  column-gap: clamp(10px, 2vw, 28px);
+}
+
+.controls-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bet-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+  min-width: 90px;
+}
+
+.bet-summary-label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+.bet-summary-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(20px, 3vh, 28px);
+  color: var(--gold-light);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------------------------------------------------------------- buttons */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  min-height: 44px;
+  border-radius: 12px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--cream);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(217, 180, 90, 0.35);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.2s, background 0.2s, border-color 0.2s, opacity 0.2s, filter 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: var(--gold);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 8px 20px rgba(0, 0, 0, 0.4),
+    0 0 16px rgba(217, 180, 90, 0.2);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.36;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.btn-icon {
+  display: grid;
+  place-items: center;
+}
+
+.btn-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.1;
+}
+
+.btn-hint {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--cream-dim);
+}
+
+.btn-kbd {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: var(--cream-dim);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.btn--primary {
+  color: #241a06;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: linear-gradient(180deg, #f8e4a2 0%, #d6a945 55%, #a87b25 100%);
+  border-color: #fbe9b4;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+  padding-inline: 22px;
+}
+
+.btn--primary .btn-hint,
+.btn--primary .btn-kbd {
+  color: rgba(36, 26, 6, 0.7);
+  border-color: rgba(36, 26, 6, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.btn--primary:hover:not(:disabled) {
+  border-color: #fff4cf;
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(243, 217, 139, 0.45);
+}
+
+.btn--primary:not(:disabled) {
+  animation: primary-glow 2.4s ease-in-out infinite;
+}
+
+.btn--ghost {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.btn--compact {
+  padding-inline: 12px;
+  font-family: var(--font-display);
+  font-weight: 800;
+}
+
+.btn--danger {
+  background: linear-gradient(180deg, #b23a3a, #7c1c1c);
+  border-color: #e88a8a;
+}
+
+.btn--wide {
+  width: 100%;
+}
+
+/* Big action buttons used during the player's turn. */
+.btn--action {
+  flex-direction: column;
+  gap: 3px;
+  min-width: clamp(78px, 12vw, 128px);
+  padding: 10px 14px 8px;
+  border-top: 3px solid var(--accent, var(--gold));
+  border-radius: 14px;
+}
+
+.btn--action .btn-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--accent, var(--gold));
+}
+
+.btn--action .btn-text {
+  align-items: center;
+}
+
+.btn--action .btn-label {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.btn--action .btn-kbd {
+  position: absolute;
+  top: 5px;
+  right: 6px;
+}
+
+.btn--hit {
+  --accent: #6fdc98;
+}
+.btn--stand {
+  --accent: #f08a7a;
+}
+.btn--double {
+  --accent: #f3d98b;
+}
+.btn--split {
+  --accent: #8cc4ff;
+}
+
+.btn--action:hover:not(:disabled) {
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.45),
+    0 0 18px color-mix(in srgb, var(--accent) 35%, transparent);
+  border-color: var(--accent);
+}
+
+@media (hover: none) {
+  .btn-kbd,
+  .rack-kbd {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .controls--betting {
+    justify-content: center;
+  }
+  .controls-group .btn--ghost .btn-text {
+    display: none;
+  }
+  .controls-group .btn--ghost.btn--compact .btn-text {
+    display: flex;
+  }
+  .btn {
+    padding: 8px 12px;
+  }
+  .btn-kbd {
+    display: none;
+  }
+  .btn--action {
+    flex: 1;
+    min-width: 0;
+  }
+  .bet-summary {
+    order: -1;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+    align-items: baseline;
+  }
+}
+
+@media (max-height: 560px) and (min-aspect-ratio: 1/1) {
+  .controls {
+    min-height: 48px;
+  }
+  .btn {
+    min-height: 38px;
+    padding-block: 6px;
+  }
+  .btn--action {
+    flex-direction: row;
+    padding-block: 6px;
+  }
+  .btn--action .btn-hint,
+  .btn-kbd {
+    display: none;
+  }
+  .btn--action .btn-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
